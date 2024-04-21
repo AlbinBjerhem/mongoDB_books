@@ -1,18 +1,13 @@
-import express from "express";
-import Author from "./models/Author.js";
+import Authors from '../models/Authors.js';
 
-const router = express.Router();
+export default function authors(server) {
+  server.get('/api/authors', async (req, res) => {
+    try {
+      const authors = await Authors.find();
+      res.status(200).json(authors);
+    } catch (error) {
+      res.status(500).json({ message: "Something went horribly wrong!", error: error });
+    }
+  });
+}
 
-// GET all authors
-router.get("/authors", async (req, res) => {
-  try {
-    const authors = await Author.find();
-    res.status(200).json(authors);
-  } catch (error) {
-    res.status(500).json({ message: "Something went wrong", error: error });
-  }
-});
-
-// Other CRUD operations for authors can be implemented similarly
-
-export default router;
