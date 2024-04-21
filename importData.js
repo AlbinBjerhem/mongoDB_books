@@ -5,17 +5,14 @@ import Book from './models/Books.js'; // Assuming you have a model for Book
 
 const connectDB = async () => {
   try {
-    // Connect to MongoDB
-    await mongoose.connect('mongodb+srv://albinbjerhem:albin12345@cluster0.79wvc3z.mongodb.net/book_API', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect('mongodb+srv://albinbjerhem:albin12345@cluster0.79wvc3z.mongodb.net/book_API');
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error('Failed to connect to MongoDB', error);
     process.exit(1); // Exit the script if unable to connect to MongoDB
   }
 };
+
 
 const importData = async () => {
   try {
