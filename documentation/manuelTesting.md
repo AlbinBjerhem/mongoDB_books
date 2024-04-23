@@ -354,8 +354,80 @@
     }
 
 ### Test Details in Postman
-- **Name of Tests**: GET 5.1 Books & GET 6. Books
+- **Name of Tests**: GET 6 Books
 - **Location**: Books_API > Manual testing > Test 06 > GET 6. Books
+
+---
+
+# Manual Testing 7: Authors
+
+## Test Case
+"Test the API’s response when sending concurrent requests to ensure that it can handle multiple users and maintain data consistency."
+
+## Test Steps
+1. **POST Phase**
+  - Send concurrent POST requests to create multiple authors.
+  - Use Postman's Collection Runner to execute these requests simultaneously.
+  - Verify each response has a 201 Created status and contains a unique author ID.
+
+2. **DELETE Phase**
+  - Send concurrent DELETE requests to remove the authors created in the POST phase.
+  - Use Postman's Collection Runner to execute these requests simultaneously.
+  - Verify each response has a 200 OK status and includes a success message for deletion.
+
+## Expected Results
+- All POST requests should return 201 Created with a unique ID for each author.
+- All DELETE requests should return 200 OK with a confirmation of deletion.
+- The database should be able to handle all the requests
+
+### Actual Test Results
+- **POST Phase Results**
+  -**Status Codes**: All 201 Created
+  -**Response Bodies**: Include IDs and confirm data integrity.
+
+- **DELETE Phase Results**:
+  -**Status Codes**: All 20 OK
+  -**Response Bodies**: Confirm successful deletion.
+
+### Test Details in Postman
+- **Name of Tests**: POST 7.1 - 7.10 Authors & DELETE 7.1 - 7.10 Authors
+- **Location**: Books_API > Manual testing > Test 07 > 7. POST Authors & 7. DELETE Authors
+
+---
+
+# Manual Testing 7: Books
+
+## Test Case
+"Test the API’s response when sending concurrent requests to ensure that it can handle multiple users and maintain data consistency."
+
+## Test Steps
+1. **POST Phase**
+  - Send concurrent POST requests to create multiple books.
+  - Use Postman's Collection Runner to execute these requests simultaneously.
+  - Verify each response has a 201 Created status and contains a unique book ID.
+
+2. **DELETE Phase**
+  - Send concurrent DELETE requests to remove the books created in the POST phase.
+  - Use Postman's Collection Runner to execute these requests simultaneously.
+  - Verify each response has a 200 OK status and includes a success message for deletion.
+
+## Expected Results
+- All POST requests should return 201 Created with a unique ID for each book.
+- All DELETE requests should return 200 OK with a confirmation of deletion.
+- The database should be able to handle all the requests
+
+### Actual Test Results
+- **POST Phase Results**
+  -**Status Codes**: All 201 Created
+  -**Response Bodies**: Include IDs and confirm data integrity.
+
+- **DELETE Phase Results**:
+  -**Status Codes**: All 20 OK
+  -**Response Bodies**: Confirm successful deletion.
+
+### Test Details in Postman
+- **Name of Tests**: POST 7.1 - 7.10 Books & DELETE 7.1 - 7.10 Books
+- **Location**: Books_API > Manual testing > Test 07 > 7. POST Books & 7. DELETE Books
 
 ---
 
