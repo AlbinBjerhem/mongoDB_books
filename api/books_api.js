@@ -65,6 +65,27 @@ export default function books(server) {
       res.status(500).json({ message: "Something went horribly wrong!", error: error });
     }
   });
+
+  // PUT endpoint to update a book
+  server.put('/api/books/:id', async (req, res) => {
+    try {
+      const { authorId, title, genre, publicationDate, info, rating } = req.body;
+      const updatedBook = await Book.findByIdAndUpdate(
+        req.params.id,
+        { $set: { authorId, title, genre, publicationDate, info, rating } },
+        { new: true, runValidators: true }
+      );
+
+      if (!updatedBook) {
+        return res.status(404).json({ message: "Book not found" });
+      }
+
+      res.status(200).json({ message: "Book updated successfully", updatedBook });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Something went horribly wrong!", error: error });
+    }
+  });
 }
 
 

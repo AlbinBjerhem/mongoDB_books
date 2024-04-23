@@ -61,4 +61,26 @@ export default function authors(server) {
       res.status(500).json({ message: "Something went horribly wrong!", error: error });
     }
   });
+
+  // PUT endpoint to update an author
+  server.put('/api/authors/:id', async (req, res) => {
+    try {
+      const { authorId, firstName, lastName } = req.body;
+      const updatedAuthor = await Author.findByIdAndUpdate(
+        req.params.id,
+        { $set: { authorId, firstName, lastName } },
+        { new: true, runValidators: true }
+      );
+
+      if (!updatedAuthor) {
+        return res.status(404).json({ message: "Author not found" });
+      }
+
+      res.status(200).json({ message: "Author updated successfully", updatedAuthor });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Something went horribly wrong!", error: error });
+    }
+  });
+
 }
