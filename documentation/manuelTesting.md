@@ -184,3 +184,53 @@
 
 ---
 
+# Manual Test 4: Authors
+
+## Test Case
+"Test if the API returns the correct data when querying with specific filters or search criteria."
+
+## Test Steps
+1. Send a GET request to /api/authors with the query parameter firstName=Quintin.
+2. Expect status code: 200 OK.
+3. Inspect the response body to confirm that only authors with the first name "Quintin" are returned.
+
+## Expected Results
+- The response status code should be 200 OK.
+- The response body should contain authors with the first name "Quintin".
+
+### Actual Test Results
+- **Status Code**: `200 OK`
+- **Response Time**: `18 ms`
+- **Response Body**: Contains authors with the first name "Quintin".
+
+### Test Details in Postman
+- **Name of Test**: GET 4. Authors
+- **Location**: Books_API > Manual testing > Test 04 > GET 4. Authors
+
+---
+
+# Manual Test 4: Books
+
+## Test Case
+"Test if the API returns the correct data when querying with specific filters or search criteria."
+
+## Test Steps
+1. Send a GET request to /api/books with the query parameter title=Science Fiction.
+2. Expect status code: 200 OK.
+3. Inspect the response body to confirm that only books with the title "Science Fiction" are returned.
+
+## Expected Results
+- The response status code should be 200 OK.
+- The response body should contain books with the title "Science Fiction".
+
+### Actual Test Results
+- **Status Code**: `200 OK`
+- **Response Time**: `59 ms`
+- **Response Body**: Contains books with the title "Science Fiction".
+
+### Test Details in Postman
+- **Name of Test**: GET 4. Books
+- **Location**: Books_API > Manual testing > Test 04 > GET 4. Books
+
+---
+
