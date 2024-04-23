@@ -135,3 +135,52 @@
 ### Test Details in Postman
 - **Name of Test**: GET 2. Books
 - **Location**: Books_API > Manual testing > Test 02 > GET 02. Books
+
+---
+
+# Manual Test 3: Authors
+
+## Test Case
+"Ensure that the API returns the correct HTTP status code (e.g., 400 Bad Request) for an invalid request."
+
+## Test Steps
+1. Send a GET request to a non-existent endpoint, such as `http://localhost:3000/api/authors/bad`.
+2. Expect status code: `404 Not Found`.
+
+## Expected Results
+- The response status code should be `404 Not Found`.
+
+### Actual Test Results
+- **Status Code**: `404 Not Found`
+- **Response Time**: `592 ms`
+- **Response Body**: Contains a message indicating the endpoint was not found.
+
+### Test Details in Postman
+- **Name of Test**: GET 3. Authors
+- **Location**: Books_API > Manual testing > Test 03 > GET 3. Authors
+
+---
+
+# Manual Test 3: Books
+
+## Test Case
+"Ensure that the API returns the correct HTTP status code (e.g., 400 Bad Request) for an invalid request."
+
+## Test Steps
+1. Send a GET request to a non-existent endpoint, such as `http://localhost:3000/api/books/bad`.
+2. Expect status code: `404 Not Found`.
+
+## Expected Results
+- The response status code should be `404 Not Found`.
+
+### Actual Test Results
+- **Status Code**: `404 Not Found`
+- **Response Time**: `587 ms`
+- **Response Body**: Contains a message indicating the endpoint was not found.
+
+### Test Details in Postman
+- **Name of Test**: GET 3. Books
+- **Location**: Books_API > Manual testing > Test 03 > GET 3. Books
+
+---
+
