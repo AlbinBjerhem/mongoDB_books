@@ -234,3 +234,59 @@
 
 ---
 
+# Manual Testing 5: Authors
+
+## Test Case 
+"Verify that the API returns paginated results when a large number of records are requested."
+
+## Test Steps
+1. Send a GET request to /api/authors with query parameters page=1 and limit=10.
+2. Expect status code: 200 OK.
+3. Verify that the response body contains only 10 authors.
+4. Send another GET request to /api/authors with query parameters page=2 and limit=10.
+6. Verify that the response contains a different set of 10 authors.
+
+## Expected Resluts
+- The response status code should be 200 OK for both requests.
+- The first response body should contain the first 10 authors.
+- The second response body should contain the next set of 10 authors, different from the first response.
+
+### Actual Test Results
+- **Status Code**: `200 OK`
+- **Response Time**: `16 ms`
+- **Response Body**: The correct number of authors is returned for the respective page.
+
+### Test Details in Postman
+- **Name of Tests**: GET 5.1 Books & GET 5.2 Books
+- **Location**: Books_API > Manual testing > Test 05 > GET 5.1 Books & GET 5.2 Books
+
+---
+
+# Manual Testing 5: Books
+
+## Test Case 
+"Verify that the API returns paginated results when a large number of records are requested."
+
+## Test Steps
+1. Send a GET request to /api/books with query parameters page=2 and limit=10.
+2. Expect status code: 200 OK.
+3. Verify that the response body contains only 10 books.
+4. Send another GET request to /api/books with query parameters page=1 and limit=10.
+6. Verify that the response contains a different set of 10 books.
+
+## Expected Resluts
+- The response status code should be 200 OK for both requests.
+- The first response body should contain the second pages 10 books.
+- The second response body should contain the first 10 books, different from the first response.
+
+### Actual Test Results
+- **Status Code**: `200 OK`
+- **Response Time**: `17 ms`
+- **Response Body**: The correct number of books is returned for the respective page.
+
+### Test Details in Postman
+- **Name of Tests**: GET 5.1 Books & GET 5.2 Books
+- **Location**: Books_API > Manual testing > Test 05 > GET 5.1 Books & GET 5.2 Books
+
+---
+
