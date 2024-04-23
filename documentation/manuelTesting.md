@@ -290,3 +290,72 @@
 
 ---
 
+# Manual Testing 6: Authors
+
+## Test Case
+"Check if the API handles special characters and non-English text correctly in input data and returned responses."
+
+## Test Steps
+1. Send a GET request to /api/authors with the query parameter firstName=Pär.
+2. Expect status code: 200 OK.
+3. Verify that the response body includes authors with the name Pär.
+
+## Expected Results
+- The response status code should be 200 OK.
+- The response body should have the authors with the name Pär in it.
+
+### Actual Test Results
+- **Status Code**: `200 OK`
+- **Response Time**: `14 ms`
+- **Response Body**: As expected. Below is a snippet of the JSON response:
+  ```json
+    {
+        "_id": "6627dfab5985abb9867517d9",
+        "authorId": 8,
+        "firstName": "Pär",
+        "lastName": "Ärlandsson",
+        "__v": 0
+    }
+
+### Test Details in Postman
+- **Name of Tests**: GET 5.1 Books & GET 6. Authors
+- **Location**: Books_API > Manual testing > Test 06 > GET 6. Authors
+
+---
+
+# Manual Testing 6: Books
+
+## Test Case
+"Check if the API handles special characters and non-English text correctly in input data and returned responses."
+
+## Test Steps
+1. Send a GET request to /api/books with the query parameter title=Ödets smala väg.
+2. Expect status code: 200 OK.
+3. Verify that the response body includes books with the name Ödets smala väg.
+
+## Expected Results
+- The response status code should be 200 OK.
+- The response body should have the books with the name Ödets smala väg in it.
+
+### Actual Test Results
+- **Status Code**: `200 OK`
+- **Response Time**: `15 ms`
+- **Response Body**: As expected. Below is a snippet of the JSON response:
+  ```json
+   {
+        "_id": "6627dfab5985abb986751840",
+        "genre": "Non-fiction",
+        "title": "Ödets smala väg",
+        "authorId": 44,
+        "publicationDate": "1958-07-09T00:00:00.000Z",
+        "info": "Provides insightful analysis and detailed exploration of real-world topics. The plot is engaging and thought-provoking, suitable for all fans of the genre.",
+        "rating": 2,
+        "__v": 0
+    }
+
+### Test Details in Postman
+- **Name of Tests**: GET 5.1 Books & GET 6. Books
+- **Location**: Books_API > Manual testing > Test 06 > GET 6. Books
+
+---
+

@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const bookSchema = new mongoose.Schema({
+  genre: {
+    type: String,
+    required: true
+  },
   title: {
     type: String,
     required: true
@@ -8,7 +12,7 @@ const bookSchema = new mongoose.Schema({
   authorId: {
     type: Number,
     required: true,
-    ref: 'Author' // This assumes you are referencing by the `authorId` and not the MongoDB `_id`
+    ref: 'Author'
   },
   publicationDate: {
     type: Date,
