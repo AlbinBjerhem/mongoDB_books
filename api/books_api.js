@@ -1,8 +1,21 @@
 import Book from '../models/Books.js';
 
 export default function books(server) {
+  // Specific GET endpoint to retrieve a single book by ID
+  server.get('/api/books/:id', async (req, res) => {
+    try {
+      const book = await Book.findById(req.params.id);
+      if (!book) {
+        return res.status(404).json({ message: "Book not found" });
+      }
+      res.json(book);
+    } catch (error) {
+      console.error("Error fetching book by ID:", error);
+      res.status(500).json({ message: "Something went horribly wrong!", error });
+    }
+  });
 
-  // GET endpoint to get all books
+  // General GET endpoint to retrieve all books with optional pagination and search by title
   server.get('/api/books', async (req, res) => {
     try {
       const page = parseInt(req.query.page, 10) || 1;
@@ -24,8 +37,8 @@ export default function books(server) {
 
       res.status(200).json(books);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Something went horribly wrong!", error: error });
+      console.error("Error fetching books:", error);
+      res.status(500).json({ message: "Something went horribly wrong!", error });
     }
   });
 
@@ -51,7 +64,7 @@ export default function books(server) {
     }
   });
 
-  //DELETE endpoint to delete books
+  // DELETE endpoint to delete books
   server.delete('/api/books/:id', async (req, res) => {
     try {
       const deletedBook = await Book.findByIdAndDelete(req.params.id);
@@ -87,6 +100,3 @@ export default function books(server) {
     }
   });
 }
-
-
-

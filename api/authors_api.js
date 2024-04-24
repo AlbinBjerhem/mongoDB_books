@@ -1,8 +1,21 @@
 import Author from '../models/Authors.js';
 
 export default function authors(server) {
+  // Specific GET endpoint to retrieve a single author by ID
+  server.get('/api/authors/:id', async (req, res) => {
+    try {
+      const author = await Author.findById(req.params.id);
+      if (!author) {
+        return res.status(404).json({ message: "Author not found" });
+      }
+      res.json(author);
+    } catch (error) {
+      console.error("Error fetching author by ID:", error);
+      res.status(500).json({ message: "Something went horribly wrong!", error });
+    }
+  });
 
-  // GET endpoint to retrieve all authors
+  // General GET endpoint to retrieve all authors with optional pagination and search by firstName
   server.get('/api/authors', async (req, res) => {
     try {
       const page = parseInt(req.query.page, 10) || 1;
@@ -24,8 +37,8 @@ export default function authors(server) {
 
       res.status(200).json(authors);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Something went horribly wrong!", error: error });
+      console.error("Error fetching authors:", error);
+      res.status(500).json({ message: "Something went horribly wrong!", error });
     }
   });
 
@@ -65,10 +78,10 @@ export default function authors(server) {
   // PUT endpoint to update an author
   server.put('/api/authors/:id', async (req, res) => {
     try {
-      const { authorId, firstName, lastName } = req.body;
+      const { firstName, lastName } = req.body;
       const updatedAuthor = await Author.findByIdAndUpdate(
         req.params.id,
-        { $set: { authorId, firstName, lastName } },
+        { $set: { firstName, lastName } },
         { new: true, runValidators: true }
       );
 

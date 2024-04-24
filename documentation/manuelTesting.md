@@ -494,3 +494,95 @@
 ### Test Details in Postman
 - **Name of Tests**: POST 8. Books, GET 8. Books, PUT 8. Books & DELETE 8. Books
 - **Location**: Books_API > Manual testing > Test 08 > Book Tests
+
+---
+
+# Manual Testing 9: Authors
+
+## Test Case
+"Check if the API correctly handles updates to existing records, ensuring that changes are saved and reflected in subsequent requests."
+
+## Test Steps
+1. **GET Initial Data**: 
+   - Send a GET request to `/api/authors` to retrieve the initial author data.
+     - Expect status code: 200 OK.
+     - Verify that the response body contains author details.
+     - Save the ID, original first name, and original last name of the first author in environment variables.
+
+2. **PUT Update Author**: 
+   - Send a PUT request to `/api/authors/{{authorId}}` to update the first author's details.
+     - Expect status code: 200 OK.
+     - Verify that the response confirms the update.
+     - Save the updated first name and last name in environment variables.
+
+3. **GET Updated Data**: 
+   - Send a GET request to `/api/authors/{{authorId}}` to retrieve the updated author details.
+     - Expect status code: 200 OK.
+     - Verify that the response body contains the updated first name and last name.
+     - Compare the updated first name and last name with the original values saved in environment variables.
+
+4. **PUT Revert Changes**: 
+   - Send a PUT request to `/api/authors/{{authorId}}` to revert the author's details to the original values.
+     - Expect status code: 200 OK.
+     - Verify that the response confirms the update.
+     - Check that the updated first name and last name match the original values saved in environment variables.
+
+## Expected Results
+- All requests return the correct status codes as outlined above.
+- Authors details are correctly updated and reverted as expected.
+
+### Actual Test Results
+- **Status Codes**: `200 OK`, `200 OK`, `200 OK`, `200 OK`
+- **Response Time**: Average `28 ms`
+- **Response Body**: Shows the correct author information.
+
+### Test Details in Postman
+- **Name of Tests**: GET 9. Authors, PUT 9. Authors, GET 9. Authors & PUT 9. Authors
+- **Location**: Books_API > Manual testing > Test 09 > Authors Tests
+
+---
+
+# Manual Testing 9: Books
+
+## Test Case
+"Check if the API correctly handles updates to existing records, ensuring that changes are saved and reflected in subsequent requests."
+
+## Test Steps
+1. **GET Initial Data**: 
+   - Send a GET request to `/api/books` to retrieve the initial book data.
+     - Expect status code: 200 OK.
+     - Verify that the response body contains book details.
+     - Save the ID, original title of the first book in environment variables.
+
+2. **PUT Update Book**: 
+   - Send a PUT request to `/api/books/{{bookId}}` to update the first book's details.
+     - Expect status code: 200 OK.
+     - Verify that the response confirms the update.
+     - Save the updated title in environment variables.
+
+3. **GET Updated Data**: 
+   - Send a GET request to `/api/books/{{bookId}}` to retrieve the updated book details.
+     - Expect status code: 200 OK.
+     - Verify that the response body contains the updated title.
+     - Compare the updated title with the original values saved in environment variables.
+
+4. **PUT Revert Changes**: 
+   - Send a PUT request to `/api/books/{{bookId}}` to revert the book's details to the original values.
+     - Expect status code: 200 OK.
+     - Verify that the response confirms the update.
+     - Check that the updated title match the original values saved in environment variables.
+
+## Expected Results
+- All requests return the correct status codes as outlined above.
+- Books details are correctly updated and reverted as expected.
+
+### Actual Test Results
+- **Status Codes**: `200 OK`, `200 OK`, `200 OK`, `200 OK`
+- **Response Time**: Average `25 ms`
+- **Response Body**: Shows the correct books information.
+
+### Test Details in Postman
+- **Name of Tests**: GET 9. Books, PUT 9. Books, GET 9. Books & PUT 9. Books
+- **Location**: Books_API > Manual testing > Test 09 > Books Tests
+
+---
