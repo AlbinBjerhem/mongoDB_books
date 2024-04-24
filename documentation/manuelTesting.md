@@ -429,27 +429,20 @@
 - **Name of Tests**: POST 7.1 - 7.10 Books & DELETE 7.1 - 7.10 Books
 - **Location**: Books_API > Manual testing > Test 07 > 7. POST Books & 7. DELETE Books
 
-
-
-
-
-
-
-
 ---
 
 # Manual Testing 8: Authors
 
 ## Test Case
-"Verify that the API supports full lifecycle management of authors with GET, POST, PUT, and DELETE operations."
+"Create an automated test and test if the API correctly handles different HTTP methods (GET, POST, PUT, DELETE) for each endpoint and returns appropriate status codes and responses for each method."
 
 ## Test Steps
 1. **POST**: Send a POST request to `/api/authors` to create a new author.
    - Expect status code: 201 Created.
    - Verify that the response body contains the ID of the newly created author.
-2. **GET**: Send a GET request to `/api/authors/{authorId}` to retrieve the newly created author.
+2. **GET**: Send a GET request to `/api/authors` to retrieve the authors.
    - Expect status code: 200 OK.
-   - Verify that the author's details match those sent in the POST request.
+   - Verify that the authors details are in the body,
 3. **PUT**: Send a PUT request to `/api/authors/{authorId}` to update the author's details.
    - Expect status code: 200 OK.
    - Verify that the response confirms the update.
@@ -459,7 +452,6 @@
 
 ## Expected Results
 - All requests return the correct status codes as outlined above.
-- The author data in GET and PUT requests match expected values.
 
 ### Actual Test Results
 - **Status Codes**: `201 Created`, `200 OK`, `200 OK`, `200 OK`
@@ -467,7 +459,7 @@
 - **Response Body**: Correctly reflects the author data for each operation.
 
 ### Test Details in Postman
-- **Name of Tests**: Author Lifecycle Management
+- **Name of Tests**: POST 8. Authors, GET 8. Authors, PUT 8. Authors & DELETE 8. Authors
 - **Location**: Books_API > Manual testing > Test 08 > Author Tests
 
 ---
@@ -481,9 +473,9 @@
 1. **POST**: Send a POST request to `/api/books` to create a new book.
    - Expect status code: 201 Created.
    - Verify that the response body contains the ID of the newly created book.
-2. **GET**: Send a GET request to `/api/books/{bookId}` to retrieve the newly created book.
+2. **GET**: Send a GET request to `/api/books` to retrieve the books.
    - Expect status code: 200 OK.
-   - Verify that the book's details match those sent in the POST request.
+   - Verify that the books details are in the body.
 3. **PUT**: Send a PUT request to `/api/books/{bookId}` to update the book's details.
    - Expect status code: 200 OK.
    - Verify that the response confirms the update.
@@ -493,7 +485,6 @@
 
 ## Expected Results
 - All requests return the correct status codes as outlined above.
-- The book data in GET and PUT requests match expected values.
 
 ### Actual Test Results
 - **Status Codes**: `201 Created`, `200 OK`, `200 OK`, `200 OK`
@@ -501,5 +492,5 @@
 - **Response Body**: Correctly reflects the book data for each operation.
 
 ### Test Details in Postman
-- **Name of Tests**: Book Lifecycle Management
+- **Name of Tests**: POST 8. Books, GET 8. Books, PUT 8. Books & DELETE 8. Books
 - **Location**: Books_API > Manual testing > Test 08 > Book Tests
