@@ -1,20 +1,34 @@
 import Book from '../models/Books.js';
 import mongoose from 'mongoose';
-
-// Middleware to validate 'id' parameter
-const validateObjectId = (req, res, next) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-    return res.status(400).json({ message: "Invalid ID format" });
-  }
-  next();
-};
+import { toggleDatabaseFailure, isDatabaseFailureSimulated } from '../testUtilites.js';
 
 export default function books(server) {
-  // Apply the middleware to all routes that include an ':id' parameter
-  server.use('/api/books/:id', validateObjectId);
+  // Middleware to validate 'id' parameter
+  const validateObjectId = (req, res, next) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: "Invalid ID format" });
+    }
+    next();
+  };
+
+  // Testing routes to simulate database failure
+  if (process.env.NODE_ENV !== 'production') {
+    server.get('/api/books/simulate-failure', (req, res) => {
+      toggleDatabaseFailure(true);
+      res.json({ message: "Database failure mode activated for books." });
+    });
+
+    server.get('/api/books/restore-database', (req, res) => {
+      toggleDatabaseFailure(false);
+      res.json({ message: "Database connection restored for books." });
+    });
+  }
 
   // Specific GET endpoint to retrieve a single book by ID
-  server.get('/api/books/:id', async (req, res) => {
+  server.get('/api/books/:id', validateObjectId, async (req, res) => {
+    if (isDatabaseFailureSimulated()) {
+      return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
+    }
     try {
       const book = await Book.findById(req.params.id);
       if (!book) {
@@ -39,14 +53,12 @@ export default function books(server) {
 
       const { title } = req.query;
       let query = {};
-
       if (title) {
         query.title = { $regex: new RegExp(title, 'i') };
       }
 
       const skip = (page - 1) * limit;
       const books = await Book.find(query).skip(skip).limit(limit);
-
       res.status(200).json(books);
     } catch (error) {
       console.error("Error fetching books:", error);
@@ -56,6 +68,9 @@ export default function books(server) {
 
   // POST endpoint to post new books
   server.post('/api/books', async (req, res) => {
+    if (isDatabaseFailureSimulated()) {
+      return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
+    }
     try {
       const { authorId, title, genre, publicationDate, info, rating } = req.body;
       const newBook = new Book({
@@ -68,7 +83,6 @@ export default function books(server) {
       });
 
       const savedBook = await newBook.save();
-
       res.status(201).json(savedBook);
     } catch (error) {
       console.error("Error adding new book:", error);
@@ -77,7 +91,10 @@ export default function books(server) {
   });
 
   // DELETE endpoint to delete books
-  server.delete('/api/books/:id', async (req, res) => {
+  server.delete('/api/books/:id', validateObjectId, async (req, res) => {
+    if (isDatabaseFailureSimulated()) {
+      return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
+    }
     try {
       const deletedBook = await Book.findByIdAndDelete(req.params.id);
       if (!deletedBook) {
@@ -92,7 +109,10 @@ export default function books(server) {
   });
 
   // PUT endpoint to update a book
-  server.put('/api/books/:id', async (req, res) => {
+  server.put('/api/books/:id', validateObjectId, async (req, res) => {
+    if (isDatabaseFailureSimulated()) {
+      return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
+    }
     try {
       const { authorId, title, genre, publicationDate, info, rating } = req.body;
       const updatedBook = await Book.findByIdAndUpdate(

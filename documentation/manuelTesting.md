@@ -622,22 +622,35 @@
 
 ---
 
+# Manual Testing 10: Books
+
 ## Test Case
 "Test the API’s performance under heavy load, simulating a large number of users making requests simultaneously"
 
 ## Test Steps
-1. **POST Create Books**: 
-   - Send POST requests to `/api/books` to create new book entries.
-     - Expect status code: 201 Created.
-     - Verify that the response contains a book ID.
-     - Save the IDs in environment variables for deletion tests.
-   - Repeat these steps for 10 iterations.
+1. **Simulate Database Failure**:
+   - **Endpoint**: `/api/authors/simulate-failure`
+   - **Method**: GET
+   - **Expected Status**: 200 OK
+   - **Test**: Verify the response indicates that the database failure mode has been activated.
 
-2. **DELETE Books**: 
-   - Use the IDs saved from the POST requests to send DELETE requests to `/api/books/{bookId}`.
-     - Expect status code: 200 OK or 204 No Content.
-     - Verify that the response message indicates successful deletion.
-   - Repeat these steps for 10 iterations.
+2. **Test Service Availability During Failure**:
+   - **Endpoint**: `/api/authors/{{authorId}}`
+   - **Method**: GET
+   - **Expected Status**: 503 Service Unavailable
+   - **Test**: Verify the response indicates service is temporarily unavailable due to a database issue.
+
+3. **Restore Database Connection**:
+   - **Endpoint**: `/api/authors/restore-database`
+   - **Method**: GET
+   - **Expected Status**: 200 OK
+   - **Test**: Verify the response indicates that the database connection has been restored.
+
+4. **Verify Normal Operation After Restoration**:
+   - **Endpoint**: `/api/authors/{{authorId}}`
+   - **Method**: GET
+   - **Expected Status**: 200 OK
+   - **Test**: Verify the response returns the author details successfully.
 
 ## Expected Results
 - POST requests should successfully create books and return a 201 Created status along with a book ID, across 10 iterations.
@@ -655,3 +668,94 @@
 
 ---
 
+# Manual Testing 11: Authors
+
+## Test Case
+"Verify that the API can recover gracefully from failures, such as database connection issues without compromising data integrity."
+
+## Test Steps
+1. **Simulate Database Failure**:
+   - **Endpoint**: `/api/authors/simulate-failure`
+   - **Method**: GET
+   - **Expected Status**: 200 OK
+   - **Test**: Verify the response indicates that the database failure mode has been activated.
+
+2. **Test Service Availability During Failure**:
+   - **Endpoint**: `/api/authors/{{authorId}}`
+   - **Method**: GET
+   - **Expected Status**: 503 Service Unavailable
+   - **Test**: Verify the response indicates service is temporarily unavailable due to a database issue.
+
+3. **Restore Database Connection**:
+   - **Endpoint**: `/api/authors/restore-database`
+   - **Method**: GET
+   - **Expected Status**: 200 OK
+   - **Test**: Verify the response indicates that the database connection has been restored.
+
+4. **Verify Normal Operation After Restoration**:
+   - **Endpoint**: `/api/authors/{{authorId}}`
+   - **Method**: GET
+   - **Expected Status**: 200 OK
+   - **Test**: Verify the response returns the author details successfully.
+
+## Expected Results
+- Actions to simulate and restore database functionality should confirm the API's ability to handle failures gracefully.
+- The API should provide clear messages about the current state during and after the failure.
+- Recovery actions should restore normal service without data loss or corruption.
+
+### Actual Test Results
+- **Status Codes**: `200 OK`, `503 Service Unavailable`, `200 OK`
+- **Response Time**: Average `50 ms` during normal operation, `120 ms` during failure simulation.
+- **Response Body**: Accurately reflects the API's state and error handling capabilities.
+
+### Test Details in Postman
+- **Name of Tests**: GET 11.1 - 11.3 Authors
+- **Location**: Books_API > Manual testing > Test 11 > 11.1 - 11.3 GET Authors
+
+---
+
+# Manual Testing 11: Books
+
+## Test Case
+"Verify that the API can recover gracefully from failures, such as database connection issues without compromising data integrity."
+
+## Test Steps
+1. **Simulate Database Failure**:
+   - **Endpoint**: `/api/books/simulate-failure`
+   - **Method**: GET
+   - **Expected Status**: 200 OK
+   - **Test**: Verify the response indicates that the database failure mode has been activated.
+
+2. **Test Service Availability During Failure**:
+   - **Endpoint**: `/api/books/{{bookId}}`
+   - **Method**: GET
+   - **Expected Status**: 503 Service Unavailable
+   - **Test**: Verify the response indicates service is temporarily unavailable due to a database issue.
+
+3. **Restore Database Connection**:
+   - **Endpoint**: `/api/books/restore-database`
+   - **Method**: GET
+   - **Expected Status**: 200 OK
+   - **Test**: Verify the response indicates that the database connection has been restored.
+
+4. **Verify Normal Operation After Restoration**:
+   - **Endpoint**: `/api/books/{{bookId}}`
+   - **Method**: GET
+   - **Expected Status**: 200 OK
+   - **Test**: Verify the response returns the book details successfully.
+
+## Expected Results
+- Actions to simulate and restore database functionality should confirm the API's ability to handle failures gracefully.
+- The API should provide clear messages about the current state during and after the failure.
+- Recovery actions should restore normal service without data loss or corruption..
+
+### Actual Test Results
+- **Status Codes**: `200 OK`, `503 Service Unavailable`, `200 OK`
+- **Response Time**: Average `50 ms` during normal operation, `111 ms` during failure simulation.
+- **Response Body**: Accurately reflects the API's state and error handling capabilities.
+
+### Test Details in Postman
+- **Name of Tests**: GET 11.1 - 11.3 Books
+- **Location**: Books_API > Manual testing > Test 11 > 11.1 - 11.3 GET Books
+
+---

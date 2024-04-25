@@ -1,18 +1,34 @@
 import Author from '../models/Authors.js';
 import mongoose from 'mongoose';
-
-// Middleware to validate 'id' parameter
-const validateObjectId = (req, res, next) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-    return res.status(400).json({ message: "Invalid ID format" });
-  }
-  next();
-};
+import { toggleDatabaseFailure, isDatabaseFailureSimulated } from '../testUtilites.js';
 
 export default function authors(server) {
+  // Middleware to validate 'id' parameter
+  const validateObjectId = (req, res, next) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: "Invalid ID format" });
+    }
+    next();
+  };
+
+  // Testing routes to simulate database failure
+  if (process.env.NODE_ENV !== 'production') {
+    server.get('/api/authors/simulate-failure', (req, res) => {
+      toggleDatabaseFailure(true);
+      res.json({ message: "Database failure mode activated for authors." });
+    });
+
+    server.get('/api/authors/restore-database', (req, res) => {
+      toggleDatabaseFailure(false);
+      res.json({ message: "Database connection restored for authors." });
+    });
+  }
 
   // Specific GET endpoint to retrieve a single author by ID
   server.get('/api/authors/:id', validateObjectId, async (req, res) => {
+    if (isDatabaseFailureSimulated()) {
+      return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
+    }
     try {
       const author = await Author.findById(req.params.id);
       if (!author) {
@@ -54,6 +70,9 @@ export default function authors(server) {
 
   // POST endpoint to add a new author
   server.post('/api/authors', async (req, res) => {
+    if (isDatabaseFailureSimulated()) {
+      return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
+    }
     try {
       const { authorId, firstName, lastName } = req.body;
       const newAuthor = new Author({
@@ -72,6 +91,9 @@ export default function authors(server) {
 
   // DELETE endpoint to delete an author by ID
   server.delete('/api/authors/:id', validateObjectId, async (req, res) => {
+    if (isDatabaseFailureSimulated()) {
+      return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
+    }
     try {
       const deletedAuthor = await Author.findByIdAndDelete(req.params.id);
       if (!deletedAuthor) {
@@ -87,6 +109,9 @@ export default function authors(server) {
 
   // PUT endpoint to update an author
   server.put('/api/authors/:id', validateObjectId, async (req, res) => {
+    if (isDatabaseFailureSimulated()) {
+      return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
+    }
     try {
       const { firstName, lastName } = req.body;
       const updatedAuthor = await Author.findByIdAndUpdate(
@@ -105,5 +130,4 @@ export default function authors(server) {
       res.status(500).json({ message: "Something went horribly wrong!", error });
     }
   });
-
 }
