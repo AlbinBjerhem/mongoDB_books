@@ -61,6 +61,10 @@ export default function authors(server) {
       const skip = (page - 1) * limit;
       const authors = await Author.find(query).skip(skip).limit(limit);
 
+      if (authors.length === 0) {
+        return res.status(404).json({ message: "No authors found with the specified name" });
+      }
+
       res.status(200).json(authors);
     } catch (error) {
       console.error("Error fetching authors:", error);

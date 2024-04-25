@@ -759,3 +759,59 @@
 - **Location**: Books_API > Manual testing > Test 11 > 11.1 - 11.3 GET Books
 
 ---
+
+# Manual Testing 12: Authors
+
+## Test Case
+"Test the API’s ability to handle edge cases, such as requests with missing or invalid parameters, and ensure that appropriate error messages are returned."
+
+## Test Steps
+1. **Simulate Database Failure**:
+   - **Endpoint**: `/api/authors`
+   - **Method**: GET
+   - **Query Parameters**: 
+    - `firstName=Mustafaa`
+   - **Expected Status**: 404 Not Found
+   - **Test**: Verify the response indicates that no authors were found with the name 'Mustafaa'.
+
+## Expected Results
+- The API should correctly identify that no authors are found and return a 4`404 Not Found` status.
+- The response should clearly state that no authors with the specified name were found.
+
+### Actual Test Results
+- **Status Codes**: `404 Not Found`
+- **Response Time**: `15 ms`
+- **Response Body**: `{"message": "No authors found with the specified name"}`
+
+### Test Details in Postman
+- **Name of Tests**: GET 12. Authors
+- **Location**: Books_API > Manual testing > Test 12 > 12 GET Authors
+
+---
+
+# Manual Testing 12: Books
+
+## Test Case
+"Test the API’s ability to handle edge cases, such as requests with missing or invalid parameters, and ensure that appropriate error messages are returned."
+
+## Test Steps
+1. **Simulate Database Failure**:
+   - **Endpoint**: `/api/books`
+   - **Method**: GET
+   - **Query Parameters**: 
+    - `title=Ödets väg`
+   - **Expected Status**: 404 Not Found
+   - **Test**: Verify the response indicates that no books were found with the title 'Ödets väg'.
+
+## Expected Results
+- The API should correctly identify that no books are found and return a `404 Not Found` status.
+- The response should clearly state that no books with the specified title were found.
+
+### Actual Test Results
+- **Status Codes**: `404 Not Found`
+- **Response Time**: `15 ms`
+- **Response Body**: `{"message": "No books found with the specified title"}`
+
+### Test Details in Postman
+- **Name of Tests**: GET 12. Books
+- **Location**: Books_API > Manual testing > Test 12 > 12 GET Books

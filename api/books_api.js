@@ -59,6 +59,11 @@ export default function books(server) {
 
       const skip = (page - 1) * limit;
       const books = await Book.find(query).skip(skip).limit(limit);
+
+      if (books.length === 0) {
+        return res.status(404).json({ message: "No books found with the specified title" });
+      }
+
       res.status(200).json(books);
     } catch (error) {
       console.error("Error fetching books:", error);
