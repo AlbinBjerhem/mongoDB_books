@@ -1,8 +1,18 @@
 import Author from '../models/Authors.js';
+import mongoose from 'mongoose';
+
+// Middleware to validate 'id' parameter
+const validateObjectId = (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ message: "Invalid ID format" });
+  }
+  next();
+};
 
 export default function authors(server) {
+
   // Specific GET endpoint to retrieve a single author by ID
-  server.get('/api/authors/:id', async (req, res) => {
+  server.get('/api/authors/:id', validateObjectId, async (req, res) => {
     try {
       const author = await Author.findById(req.params.id);
       if (!author) {
@@ -55,13 +65,13 @@ export default function authors(server) {
 
       res.status(201).json(savedAuthor);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Something went horribly wrong!", error: error });
+      console.error("Error adding new author:", error);
+      res.status(500).json({ message: "Something went horribly wrong!", error });
     }
   });
 
   // DELETE endpoint to delete an author by ID
-  server.delete('/api/authors/:id', async (req, res) => {
+  server.delete('/api/authors/:id', validateObjectId, async (req, res) => {
     try {
       const deletedAuthor = await Author.findByIdAndDelete(req.params.id);
       if (!deletedAuthor) {
@@ -70,13 +80,13 @@ export default function authors(server) {
 
       res.status(200).json({ message: "Author deleted successfully", deletedAuthor });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Something went horribly wrong!", error: error });
+      console.error("Error deleting author:", error);
+      res.status(500).json({ message: "Something went horribly wrong!", error });
     }
   });
 
   // PUT endpoint to update an author
-  server.put('/api/authors/:id', async (req, res) => {
+  server.put('/api/authors/:id', validateObjectId, async (req, res) => {
     try {
       const { firstName, lastName } = req.body;
       const updatedAuthor = await Author.findByIdAndUpdate(
@@ -91,8 +101,8 @@ export default function authors(server) {
 
       res.status(200).json({ message: "Author updated successfully", updatedAuthor });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Something went horribly wrong!", error: error });
+      console.error("Error updating author:", error);
+      res.status(500).json({ message: "Something went horribly wrong!", error });
     }
   });
 

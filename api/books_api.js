@@ -1,6 +1,18 @@
 import Book from '../models/Books.js';
+import mongoose from 'mongoose';
+
+// Middleware to validate 'id' parameter
+const validateObjectId = (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ message: "Invalid ID format" });
+  }
+  next();
+};
 
 export default function books(server) {
+  // Apply the middleware to all routes that include an ':id' parameter
+  server.use('/api/books/:id', validateObjectId);
+
   // Specific GET endpoint to retrieve a single book by ID
   server.get('/api/books/:id', async (req, res) => {
     try {
@@ -59,8 +71,8 @@ export default function books(server) {
 
       res.status(201).json(savedBook);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Something went horribly wrong!", error: error });
+      console.error("Error adding new book:", error);
+      res.status(500).json({ message: "Something went horribly wrong!", error });
     }
   });
 
@@ -74,8 +86,8 @@ export default function books(server) {
 
       res.status(200).json({ message: "Book deleted successfully", deletedBook });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Something went horribly wrong!", error: error });
+      console.error("Error deleting book:", error);
+      res.status(500).json({ message: "Something went horribly wrong!", error });
     }
   });
 
@@ -95,8 +107,8 @@ export default function books(server) {
 
       res.status(200).json({ message: "Book updated successfully", updatedBook });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Something went horribly wrong!", error: error });
+      console.error("Error updating book:", error);
+      res.status(500).json({ message: "Something went horribly wrong!", error });
     }
   });
 }

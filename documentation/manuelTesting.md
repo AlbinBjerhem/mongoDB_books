@@ -586,3 +586,72 @@
 - **Location**: Books_API > Manual testing > Test 09 > Books Tests
 
 ---
+
+# Manual Testing 10: Authors
+
+## Test Case
+"Test the API’s performance under heavy load, simulating a large number of users making requests simultaneously."
+
+## Test Steps
+1. **POST Create Authors**: 
+   - Send POST requests to `/api/authors` to create new author entries.
+     - Expect status code: 201 Created.
+     - Verify that the response contains an author ID.
+     - Save the IDs in environment variables for deletion tests.
+   - Repeat these steps for 10 iterations.
+
+2. **DELETE Authors**: 
+   - Use the IDs saved from the POST requests to send DELETE requests to `/api/authors/{authorId}`.
+     - Expect status code: 200 OK or 204 No Content.
+     - Verify that the response message indicates successful deletion.
+   - Repeat these steps for 10 iterations.
+
+## Expected Results
+- POST requests should successfully create authors and return a 201 Created status along with an author ID, across 10 iterations.
+- DELETE requests should successfully remove authors and return either a 200 OK or 204 No Content status, across 10 iterations.
+- The server should be able to handle all this data.
+
+### Actual Test Results
+- **Status Codes**: `201 Created`, `200 OK`
+- **Response Time**: Average `30 ms`
+- **Response Body**: Shows successful creation and deletion messages.
+
+### Test Details in Postman
+- **Name of Tests**: POST 10.1 - 10.10 Authors & DELETE 10.1 - 10.10 Authors
+- **Location**: Books_API > Manual testing > Test 10 > 10. POST Authors & 10. DELETE Authors
+
+---
+
+## Test Case
+"Test the API’s performance under heavy load, simulating a large number of users making requests simultaneously"
+
+## Test Steps
+1. **POST Create Books**: 
+   - Send POST requests to `/api/books` to create new book entries.
+     - Expect status code: 201 Created.
+     - Verify that the response contains a book ID.
+     - Save the IDs in environment variables for deletion tests.
+   - Repeat these steps for 10 iterations.
+
+2. **DELETE Books**: 
+   - Use the IDs saved from the POST requests to send DELETE requests to `/api/books/{bookId}`.
+     - Expect status code: 200 OK or 204 No Content.
+     - Verify that the response message indicates successful deletion.
+   - Repeat these steps for 10 iterations.
+
+## Expected Results
+- POST requests should successfully create books and return a 201 Created status along with a book ID, across 10 iterations.
+- DELETE requests should successfully remove books and return either a 200 OK or 204 No Content status, across 10 iterations.
+- The server should be able to handle all this data.
+
+### Actual Test Results
+- **Status Codes**: `201 Created`, `200 OK`
+- **Response Time**: Average `25 ms`
+- **Response Body**: Shows successful creation and deletion messages.
+
+### Test Details in Postman
+- **Name of Tests**: POST 10.1 - 10.10 Books & DELETE 10.1 - 10.10 Books
+- **Location**: Books_API > Manual testing > Test 10 > 10. POST Books & 10. DELETE Books
+
+---
+
