@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import { toggleDatabaseFailure, isDatabaseFailureSimulated } from '../testUtilites.js';
 
 export default function authors(server) {
-  // Middleware to validate 'id' parameter
   const validateObjectId = (req, res, next) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: "Invalid ID format" });
@@ -11,7 +10,6 @@ export default function authors(server) {
     next();
   };
 
-  // Testing routes to simulate database failure
   if (process.env.NODE_ENV !== 'production') {
     server.get('/api/authors/simulate-failure', (req, res) => {
       toggleDatabaseFailure(true);
@@ -24,7 +22,6 @@ export default function authors(server) {
     });
   }
 
-  // Specific GET endpoint to retrieve a single author by ID
   server.get('/api/authors/:id', validateObjectId, async (req, res) => {
     if (isDatabaseFailureSimulated()) {
       return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
@@ -41,7 +38,6 @@ export default function authors(server) {
     }
   });
 
-  // General GET endpoint to retrieve all authors with optional pagination and search by firstName
   server.get('/api/authors', async (req, res) => {
     try {
       const page = parseInt(req.query.page, 10) || 1;
@@ -72,7 +68,6 @@ export default function authors(server) {
     }
   });
 
-  // POST endpoint to add a new author
   server.post('/api/authors', async (req, res) => {
     if (isDatabaseFailureSimulated()) {
       return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
@@ -93,7 +88,6 @@ export default function authors(server) {
     }
   });
 
-  // DELETE endpoint to delete an author by ID
   server.delete('/api/authors/:id', validateObjectId, async (req, res) => {
     if (isDatabaseFailureSimulated()) {
       return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
@@ -111,7 +105,6 @@ export default function authors(server) {
     }
   });
 
-  // PUT endpoint to update an author
   server.put('/api/authors/:id', validateObjectId, async (req, res) => {
     if (isDatabaseFailureSimulated()) {
       return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });

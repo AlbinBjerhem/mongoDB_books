@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import { toggleDatabaseFailure, isDatabaseFailureSimulated } from '../testUtilites.js';
 
 export default function books(server) {
-  // Middleware to validate 'id' parameter
   const validateObjectId = (req, res, next) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: "Invalid ID format" });
@@ -11,7 +10,6 @@ export default function books(server) {
     next();
   };
 
-  // Testing routes to simulate database failure
   if (process.env.NODE_ENV !== 'production') {
     server.get('/api/books/simulate-failure', (req, res) => {
       toggleDatabaseFailure(true);
@@ -24,7 +22,6 @@ export default function books(server) {
     });
   }
 
-  // Specific GET endpoint to retrieve a single book by ID
   server.get('/api/books/:id', validateObjectId, async (req, res) => {
     if (isDatabaseFailureSimulated()) {
       return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
@@ -41,7 +38,6 @@ export default function books(server) {
     }
   });
 
-  // General GET endpoint to retrieve all books with optional pagination and search by title
   server.get('/api/books', async (req, res) => {
     try {
       const page = parseInt(req.query.page, 10) || 1;
@@ -71,7 +67,6 @@ export default function books(server) {
     }
   });
 
-  // POST endpoint to post new books
   server.post('/api/books', async (req, res) => {
     if (isDatabaseFailureSimulated()) {
       return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
@@ -95,7 +90,6 @@ export default function books(server) {
     }
   });
 
-  // DELETE endpoint to delete books
   server.delete('/api/books/:id', validateObjectId, async (req, res) => {
     if (isDatabaseFailureSimulated()) {
       return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
@@ -113,7 +107,6 @@ export default function books(server) {
     }
   });
 
-  // PUT endpoint to update a book
   server.put('/api/books/:id', validateObjectId, async (req, res) => {
     if (isDatabaseFailureSimulated()) {
       return res.status(503).json({ message: "Service temporarily unavailable due to a database issue" });
