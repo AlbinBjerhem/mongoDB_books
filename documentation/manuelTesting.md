@@ -1,11 +1,55 @@
-### Endpoints used
-1. GET http://localhost:3000/api/authors
-2. GET http://localhost:3000/api/books
+### Endpoints Used
 
-# Manual Test 1: Authors
+# Books API Endpoints
 
-## Test Case
+## GET
+- `/api/books/simulate-failure`: Simulate database failure for books.
+- `/api/books/restore-database`: Restore database connection for books.
+- `/api/books/:id`: Retrieve a single book by its ID.
+- `/api/books`: Retrieve all books with optional pagination and search by title.
+
+## POST
+- `/api/books`: Create a new book.
+
+## DELETE
+- `/api/books/:id`: Delete a book by its ID.
+
+## PUT
+- `/api/books/:id`: Update a book by its ID.
+
+---
+
+# Authors API Endpoints
+
+## GET
+- `/api/authors/simulate-failure`: Simulate database failure for authors.
+- `/api/authors/restore-database`: Restore database connection for authors.
+- `/api/authors/:id`: Retrieve a single author by their ID.
+- `/api/authors`: Retrieve all authors with optional pagination and search by first name.
+
+## POST
+- `/api/authors`: Create a new author.
+
+## DELETE
+- `/api/authors/:id`: Delete an author by their ID.
+
+## PUT
+- `/api/authors/:id`: Update an author by their ID.
+
+
+# Manual & Automatic Test 1: Authors
+
+## Test Cases
+
+## Manual
 "Verify that the API returns the correct HTTP status code (e.g., 200 OK) for a successful GET request."
+
+## Automatic
+"Validate that the API returns the correct HTTP status code (e.g., 200 OK) for a successful GET request."
+
+## Motivation
+This test validates that the API properly handles GET requests for author information. Ensuring a `200 OK` status code confirms the request's success and the accurate retrieval of data.
+This test is straightforward and doesn't require both automatic and manual testing. Automated testing can efficiently verify the HTTP status code, and manual testing isn't needed for such a simple check. If you want to run it manual you can just press send on the GET request and you will see the results.
 
 ## Test Steps
 1. Send a GET request to `http://localhost:3000/api/authors`.
@@ -26,17 +70,27 @@
       "lastName": "Ganforthe",
       "__v": 0
   }
+- **Test Result**: Test Passed: Response status code is 200
 
 ### Test Details in Postman
 - **Name of Test**: GET 1. Authors
-- **Location**: Books_API > Manual testing > Test 01 > GET 1. Authors
+- **Location**: Books_API > API Tests > Test 01 > GET 1. Authors
 
 ---
 
-# Manual Test 1: Books
+# Manual & Automatic Test 1: Books
 
-## Test Case
+## Test Cases
+
+## Manual
 "Verify that the API returns the correct HTTP status code (e.g., 200 OK) for a successful GET request."
+
+## Automatic
+"Validate that the API returns the correct HTTP status code (e.g., 200 OK) for a successful GET request."
+
+## Motivation
+This test validates that the API properly handles GET requests for books information. Ensuring a `200 OK` status code confirms the request's success and the accurate retrieval of data.
+This test is straightforward and doesn't require both automatic and manual testing. Automated testing can efficiently verify the HTTP status code, and manual testing isn't needed for such a simple check. If you want to run it manual you can just press send on the GET request and you will see the results.
 
 ## Test Steps
 1. Send a GET request to `http://localhost:3000/api/books`.
@@ -59,17 +113,27 @@
       "rating": 3,
       "__v": 0
   }
+- **Test Result**: Test Passed: Response status code is 200
 
 ### Test Details in Postman
 - **Name of Test**: GET 1. Books
-- **Location**: Books_API > Manual testing > Test 01 > GET 1. Books
+- **Location**: Books_API > API Tests > Test 01 > GET 1. Books
 
 ---
 
-# Manual Test 2: Authors
+# Manual & Automatic Test 2: Authors
 
 ## Test Case
+
+## Manual
 "Check if the API returns the expected data format (e.g., JSON, XML) in the response."
+
+## Automatic
+"Verify that the API returns the expected data format (e.g., JSON, XML) in the response."
+
+## Motivation
+This test guarantees that the API consistently provides data in the expected JSON format, ensuring compatibility and reliability across different systems.
+Since the manual and automatic tests servere basically the same purpose there is only one test for them. If you want to run it manual you can just press send on the GET request and you will see the results.
 
 ## Test Steps
 1. Send a GET request to the respective endpoint.
@@ -94,17 +158,27 @@
         "lastName": "Ganforthe",
         "__v": 0
     },
+- **Test Result**: Test Passed: Response is JSON
 
 ### Test Details in Postman
 - **Name of Test**: GET 2. Authors
-- **Location**: Books_API > Manual testing > Test 02 > GET 02. Authors
+- **Location**: Books_API > API Tests > Test 02 > GET 02. Authors
 
 ---
 
-# Manual Test 2: Books
+# Manual & Automatic Test 2: Books
 
 ## Test Case
+
+## Manual
 "Check if the API returns the expected data format (e.g., JSON, XML) in the response."
+
+## Automatic
+"Verify that the API returns the expected data format (e.g., JSON, XML) in the response."
+
+## Motivation
+This test guarantees that the API consistently provides data in the expected JSON format, ensuring compatibility and reliability across different systems.
+Since the manual and automatic tests servere basically the same purpose there is only one test for them. If you want to run it manual you can just press send on the GET request and you will see the results.
 
 ## Test Steps
 1. Send a GET request to the respective endpoint.
@@ -131,63 +205,89 @@
         "rating": 3,
         "__v": 0
     },
+- **Test Result**: Test Passed: Response is JSON
 
 ### Test Details in Postman
 - **Name of Test**: GET 2. Books
-- **Location**: Books_API > Manual testing > Test 02 > GET 02. Books
+- **Location**: Books_API > API Tests > Test 02 > GET 02. Books
 
 ---
 
-# Manual Test 3: Authors
+# Manual & Automatic Test 3: Authors
 
 ## Test Case
+
+## Manual
 "Ensure that the API returns the correct HTTP status code (e.g., 400 Bad Request) for an invalid request."
+
+## Automatic
+"Ensure that the API returns the correct HTTP status code (e.g., 400 Bad Request) for an invalid requests."
+
+## Motivation
+This tests aims to check if the server returns the correct status codes when there are invalid reqests to it and so that it doesn´t crash.
+There is no need for seperate tests for manual an automatic here, if you want to do i manually you can press the send button on the GET request itself.
 
 ## Test Steps
 1. Send a GET request to a non-existent endpoint, such as `http://localhost:3000/api/authors/bad`.
-2. Expect status code: `404 Not Found`.
+2. Expect status code: `400 Bad Request`.
 
 ## Expected Results
-- The response status code should be `404 Not Found`.
+- The response status code should be `400 Bad Request`.
 
 ### Actual Test Results
-- **Status Code**: `404 Not Found`
-- **Response Time**: `592 ms`
-- **Response Body**: Contains a message indicating the endpoint was not found.
+- **Status Code**: `400 Bad Request`
+- **Response Time**: `4 ms`
+- **Response Body**: `"message": "Invalid ID format"`.
+- **Test Result**: Test Passed: Response status code is 400
 
 ### Test Details in Postman
 - **Name of Test**: GET 3. Authors
-- **Location**: Books_API > Manual testing > Test 03 > GET 3. Authors
+- **Location**: Books_API > API Tests > Test 03 > GET 3. Authors
 
 ---
 
-# Manual Test 3: Books
+# Manual & Automatic Test 3: Books
 
 ## Test Case
+
+## Manual
 "Ensure that the API returns the correct HTTP status code (e.g., 400 Bad Request) for an invalid request."
+
+## Automatic
+"Ensure that the API returns the correct HTTP status code (e.g., 400 Bad Request) for an invalid requests."
 
 ## Test Steps
 1. Send a GET request to a non-existent endpoint, such as `http://localhost:3000/api/books/bad`.
-2. Expect status code: `404 Not Found`.
+2. Expect status code: `400 Bad Request`.
 
 ## Expected Results
-- The response status code should be `404 Not Found`.
+- The response status code should be `400 Bad Request`.
 
 ### Actual Test Results
-- **Status Code**: `404 Not Found`
-- **Response Time**: `587 ms`
-- **Response Body**: Contains a message indicating the endpoint was not found.
+- **Status Code**: `400 Bad Request`
+- **Response Time**: `7 ms`
+- **Response Body**: `"message": "Invalid ID format"`.
+- **Test Result**: Test Passed: Response status code is 400
 
 ### Test Details in Postman
 - **Name of Test**: GET 3. Books
-- **Location**: Books_API > Manual testing > Test 03 > GET 3. Books
+- **Location**: Books_API > API Tests > Test 03 > GET 3. Books
 
 ---
 
-# Manual Test 4: Authors
+# Manual & Automatic Test 4: Authors
 
 ## Test Case
+
+## Manual
 "Test if the API returns the correct data when querying with specific filters or search criteria."
+
+## Automatic
+"Create an automated test that sends a request with specific filters or search criteria and checks if the API returns the correct data."
+
+## Motivation
+This test will check if my API is able to search for specific names in my author API and only show that result.
+There is no need for seperate tests here, the Body contains the name of the author and the Test Results the automatic test. 
 
 ## Test Steps
 1. Send a GET request to /api/authors with the query parameter firstName=Quintin.
@@ -202,42 +302,62 @@
 - **Status Code**: `200 OK`
 - **Response Time**: `18 ms`
 - **Response Body**: Contains authors with the first name "Quintin".
+- **Test Result**: Test Passed: API returned correct data with specific filter
 
 ### Test Details in Postman
 - **Name of Test**: GET 4. Authors
-- **Location**: Books_API > Manual testing > Test 04 > GET 4. Authors
+- **Location**: Books_API > API Tests > Test 04 > GET 4. Authors
 
 ---
 
 # Manual Test 4: Books
 
 ## Test Case
+
+## Manual
 "Test if the API returns the correct data when querying with specific filters or search criteria."
 
+## Automatic
+"Create an automated test that sends a request with specific filters or search criteria and checks if the API returns the correct data."
+
+## Motivation
+This test will check if my API is able to search for specific titles in my books API and only show that result.
+There is no need for seperate tests here, the Body contains the title of the book and the Test Results the automatic test. 
+
 ## Test Steps
-1. Send a GET request to /api/books with the query parameter title=Science Fiction.
+1. Send a GET request to /api/books with the query parameter title=Duck Tales and Turle Butts.
 2. Expect status code: 200 OK.
-3. Inspect the response body to confirm that only books with the title "Science Fiction" are returned.
+3. Inspect the response body to confirm that only books with the title "Duck Tales and Turle Butts" are returned.
 
 ## Expected Results
 - The response status code should be 200 OK.
-- The response body should contain books with the title "Science Fiction".
+- The response body should contain books with the title "Duck Tales and Turle Butts".
 
 ### Actual Test Results
 - **Status Code**: `200 OK`
 - **Response Time**: `59 ms`
-- **Response Body**: Contains books with the title "Science Fiction".
+- **Response Body**: Contains books with the title "Duck Tales and Turle Butts".
+- **Test Result**: Test Passed: API returned correct data with specific filter
 
 ### Test Details in Postman
 - **Name of Test**: GET 4. Books
-- **Location**: Books_API > Manual testing > Test 04 > GET 4. Books
+- **Location**: Books_API > API Tests > Test 04 > GET 4. Books
 
 ---
 
-# Manual Testing 5: Authors
+# Manual & Automatic Test 5: Authors
 
 ## Test Case 
+
+## Manual
 "Verify that the API returns paginated results when a large number of records are requested."
+
+## Automatic
+"Write an automated test to verify that the API returns paginated results when a large number of records are requested."
+
+## Motivation
+Here we are testing so that the API returns the information from the database in a more manageble format so the users dont get overwhelmed.
+In this test I have both the manual and automatic test included. There is no real need for a separate one.
 
 ## Test Steps
 1. Send a GET request to /api/authors with query parameters page=1 and limit=10.
@@ -255,17 +375,27 @@
 - **Status Code**: `200 OK`
 - **Response Time**: `16 ms`
 - **Response Body**: The correct number of authors is returned for the respective page.
+- **Test Result**: Test Passed: Status code is 200, Content-Type is application/json, Response count matches the requested limit
 
 ### Test Details in Postman
-- **Name of Tests**: GET 5.1 Books & GET 5.2 Books
-- **Location**: Books_API > Manual testing > Test 05 > GET 5.1 Books & GET 5.2 Books
+- **Name of Tests**: GET 5.1 Authors & GET 5.2 Authors
+- **Location**: Books_API > API Tests > Test 05 > GET 5.1 Authors & GET 5.2 Authors
 
 ---
 
-# Manual Testing 5: Books
+# Manual & Automatic Testing 5: Books
 
 ## Test Case 
+
+## Manual
 "Verify that the API returns paginated results when a large number of records are requested."
+
+## Automatic
+"Write an automated test to verify that the API returns paginated results when a large number of records are requested."
+
+## Motivation
+Here we are testing so that the API returns the information from the database in a more manageble format so the users dont get overwhelmed.
+In this test I have both the manual and automatic test included. There is no real need for a separate one.
 
 ## Test Steps
 1. Send a GET request to /api/books with query parameters page=2 and limit=10.
@@ -283,17 +413,27 @@
 - **Status Code**: `200 OK`
 - **Response Time**: `17 ms`
 - **Response Body**: The correct number of books is returned for the respective page.
+- **Test Result**: Test Passed: Status code is 200, Content-Type is application/json, Response count matches the requested limit
 
 ### Test Details in Postman
 - **Name of Tests**: GET 5.1 Books & GET 5.2 Books
-- **Location**: Books_API > Manual testing > Test 05 > GET 5.1 Books & GET 5.2 Books
+- **Location**: Books_API > API Tests > Test 05 > GET 5.1 Books & GET 5.2 Books
 
 ---
 
-# Manual Testing 6: Authors
+# Manual & Automatic Testing 6: Authors
 
 ## Test Case
+
+## Manuel
 "Check if the API handles special characters and non-English text correctly in input data and returned responses."
+
+## Automatic
+"Test if the API handles special characters and non-English text correctly in input data and returned responses using an automated testing tool."
+
+## Motivation
+This test checks so the API can handle special characters and wont crash.
+Here I have done the manual and automatic test together, if you do the manual you can check that the parameters will find its match.
 
 ## Test Steps
 1. Send a GET request to /api/authors with the query parameter firstName=Pär.
@@ -316,17 +456,27 @@
         "lastName": "Ärlandsson",
         "__v": 0
     }
+- **Test Result**: Test Passed: Status code is 200, Content-Type is application/json, Response body handles special characters
 
 ### Test Details in Postman
-- **Name of Tests**: GET 5.1 Books & GET 6. Authors
-- **Location**: Books_API > Manual testing > Test 06 > GET 6. Authors
+- **Name of Tests**: GET 6. Authors
+- **Location**: Books_API > API Tests > Test 06 > GET 6. Authors
 
 ---
 
-# Manual Testing 6: Books
+# Manual & Automatic Testing 6: Books
 
 ## Test Case
+
+## Manuel
 "Check if the API handles special characters and non-English text correctly in input data and returned responses."
+
+## Automatic
+"Test if the API handles special characters and non-English text correctly in input data and returned responses using an automated testing tool."
+
+## Motivation
+This test checks so the API can handle special characters and wont crash.
+Here I have done the manual and automatic test together, if you do the manual you can check that the parameters will find its match.
 
 ## Test Steps
 1. Send a GET request to /api/books with the query parameter title=Ödets smala väg.
@@ -352,10 +502,11 @@
         "rating": 2,
         "__v": 0
     }
+- **Test Result**: Test Passed: Status code is 200, Content-Type is application/json, Response includes special character name
 
 ### Test Details in Postman
 - **Name of Tests**: GET 6 Books
-- **Location**: Books_API > Manual testing > Test 06 > GET 6. Books
+- **Location**: Books_API > API Tests > Test 06 > GET 6. Books
 
 ---
 
