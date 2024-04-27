@@ -818,3 +818,35 @@
 
 ---
 
+# Manual & Automatic Testing 12: Rate Limit
+
+## Test Cases
+
+## Manual
+"Verify that the API correctly implements rate limiting or throttling mechanisms to prevent abuse or excessive use of resources."
+
+## Automatic
+"Write an automated test to verify that the API correctly implements any rate limiting or throttling mechanisms to prevent abuse or excessive use of resources."
+
+## Test Steps
+1. **Rate Limit Test**:
+   - **Endpoint**: `/api/books` Could use `/api/authors` as well
+   - **Method**: GET
+   - **Test**: Execute GET requests in a loop until a `429 Too Many Requests` status is returned
+   - **Expected Status**: `429 Too Many Requests`
+
+
+## Expected Results
+- The API should consistently return status `200 OK` for requests until the rate limit is reached.
+- When reaching the rate limit the API should return a `429 Too Many Requests` status.
+
+### Actual Test Results
+- **Status Codes Before Limit**: `200 OK`
+- **Status Codes Afte Limit**: `429 Too Many Requests`
+- **Response Body When Reaching Limit**: `Too many requests, please try again later.`
+
+### Test Details in Postman
+- **Name of Tests**: GET 13. Rate-Limit
+- **Location**: Books_API > Manual testing > Test 13 > 13 GET Rate-Limit
+
+---
