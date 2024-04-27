@@ -510,10 +510,22 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ---
 
-# Manual Testing 7: Authors
+# Manual & Automatic Testing 7: Authors
 
 ## Test Case
+
+## Manual
 "Test the API’s response when sending concurrent requests to ensure that it can handle multiple users and maintain data consistency."
+
+## Automatic
+"Develop an automated test that sends concurrent requests to the API to ensure that it can handle multiple users and maintain data consistency."
+
+## Motivation
+This test is done to see that the API can handle the load of many users accessing the API at the same time. 
+The manual and automatic test is the same for this one as it is hard to do a manual test of many users.
+
+## Performance Test
+I found very late that there is a function in the Postman that can do simulated performance tests so i added a folder to Test 07 named Performance Test. If you right click on it and run collection and select Performance you can run it with 20 virtual users for 1 minute. In order for this test to work you need to change the Rate-Limit in the server.js to 3000, otherwise you will get a fault from to many requests.
 
 ## Test Steps
 1. **POST Phase**
@@ -542,14 +554,26 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ### Test Details in Postman
 - **Name of Tests**: POST 7.1 - 7.10 Authors & DELETE 7.1 - 7.10 Authors
-- **Location**: Books_API > Manual testing > Test 07 > 7. POST Authors & 7. DELETE Authors
+- **Location**: Books_API > API Tests > Test 07 > 7. POST Authors & 7. DELETE Authors
 
 ---
 
-# Manual Testing 7: Books
+# Manual & Automatic Testing 7: Books
 
 ## Test Case
+
+## Manual
 "Test the API’s response when sending concurrent requests to ensure that it can handle multiple users and maintain data consistency."
+
+## Automatic
+"Develop an automated test that sends concurrent requests to the API to ensure that it can handle multiple users and maintain data consistency."
+
+## Motivation
+This test is done to see that the API can handle the load of many users accessing the API at the same time. 
+The manual and automatic test is the same for this one as it is hard to do a manual test of many users.
+
+## Performance Test
+I found very late that there is a function in the Postman that can do simulated performance tests so i added a folder to Test 07 named Performance Test. If you right click on it and run collection and select Performance you can run it with 20 virtual users for 1 minute. In order for this test to work you need to change the Rate-Limit in the server.js to 3000, otherwise you will get a fault from to many requests.
 
 ## Test Steps
 1. **POST Phase**
@@ -578,14 +602,23 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ### Test Details in Postman
 - **Name of Tests**: POST 7.1 - 7.10 Books & DELETE 7.1 - 7.10 Books
-- **Location**: Books_API > Manual testing > Test 07 > 7. POST Books & 7. DELETE Books
+- **Location**: Books_API > API Tests > Test 07 > 7. POST Books & 7. DELETE Books
 
 ---
 
-# Manual Testing 8: Authors
+# Manual & Automatic Testing 8: Authors
 
 ## Test Case
+
+## Manual
+"Test if the API correctly handles different HTTP methods (GET, POST, PUT, DELETE) for each endpoint and returns appropriate status codes and responses for each method."
+
+## Automatic
 "Create an automated test and test if the API correctly handles different HTTP methods (GET, POST, PUT, DELETE) for each endpoint and returns appropriate status codes and responses for each method."
+
+## Motivation
+Here we are testing so the API can use all requests, GET, POST, PUT and DELETE so that we can retrive data, add data, change data and delete data.
+In this test the same ones are used for manual and automatic testing.
 
 ## Test Steps
 1. **POST**: Send a POST request to `/api/authors` to create a new author.
@@ -611,14 +644,23 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ### Test Details in Postman
 - **Name of Tests**: POST 8. Authors, GET 8. Authors, PUT 8. Authors & DELETE 8. Authors
-- **Location**: Books_API > Manual testing > Test 08 > Author Tests
+- **Location**: Books_API > API Tests > Test 08 > Author Tests
 
 ---
 
-# Manual Testing 8: Books
+# Manual & Automatic Testing 8: Books
 
 ## Test Case
-"Verify that the API supports full lifecycle management of books with GET, POST, PUT, and DELETE operations."
+
+## Manual
+"Test if the API correctly handles different HTTP methods (GET, POST, PUT, DELETE) for each endpoint and returns appropriate status codes and responses for each method."
+
+## Automatic
+"Create an automated test and test if the API correctly handles different HTTP methods (GET, POST, PUT, DELETE) for each endpoint and returns appropriate status codes and responses for each method."
+
+## Motivation
+Here we are testing so the API can use all requests, GET, POST, PUT and DELETE so that we can retrive data, add data, change data and delete data.
+In this test the same ones are used for manual and automatic testing.
 
 ## Test Steps
 1. **POST**: Send a POST request to `/api/books` to create a new book.
@@ -644,14 +686,23 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ### Test Details in Postman
 - **Name of Tests**: POST 8. Books, GET 8. Books, PUT 8. Books & DELETE 8. Books
-- **Location**: Books_API > Manual testing > Test 08 > Book Tests
+- **Location**: Books_API > API Testing > Test 08 > Book Tests
 
 ---
 
-# Manual Testing 9: Authors
+# Manual & Automatic Testing 9: Authors
 
 ## Test Case
+
+## Manual
 "Check if the API correctly handles updates to existing records, ensuring that changes are saved and reflected in subsequent requests."
+
+## Automatic
+"Write an automated test to check if the API correctly handles updates to existing records, ensuring that changes are saved and reflected in subsequent requests."
+
+## Motivation
+In this test we check if already existing records in the database can be updated using PUT. In order to not destroy data for testing purpose the data that is beeing changed will be changed back to the original values.
+There is no need to do separate testing for manual and automatic in this one since the test would be the same.
 
 ## Test Steps
 1. **GET Initial Data**: 
@@ -689,14 +740,23 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ### Test Details in Postman
 - **Name of Tests**: GET 9. Authors, PUT 9. Authors, GET 9. Authors & PUT 9. Authors
-- **Location**: Books_API > Manual testing > Test 09 > Authors Tests
+- **Location**: Books_API > API Tests > Test 09 > Authors Tests
 
 ---
 
-# Manual Testing 9: Books
+# Manual & Automatic Testing 9: Books
 
 ## Test Case
+
+## Manual
 "Check if the API correctly handles updates to existing records, ensuring that changes are saved and reflected in subsequent requests."
+
+## Automatic
+"Write an automated test to check if the API correctly handles updates to existing records, ensuring that changes are saved and reflected in subsequent requests."
+
+## Motivation
+In this test we check if already existing records in the database can be updated using PUT. In order to not destroy data for testing purpose the data that is beeing changed will be changed back to the original values.
+There is no need to do separate testing for manual and automatic in this one since the test would be the same.
 
 ## Test Steps
 1. **GET Initial Data**: 
@@ -738,10 +798,15 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ---
 
-# Manual Testing 10: Authors
+# Manual & Automatic Testing 10: Authors
 
 ## Test Case
+
+## Manual
 "Test the API’s performance under heavy load, simulating a large number of users making requests simultaneously."
+
+## Motivation
+This test will test how well the API responds to heavy trafic. 
 
 ## Test Steps
 1. **POST Create Authors**: 
@@ -769,14 +834,45 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ### Test Details in Postman
 - **Name of Tests**: POST 10.1 - 10.10 Authors & DELETE 10.1 - 10.10 Authors
-- **Location**: Books_API > Manual testing > Test 10 > 10. POST Authors & 10. DELETE Authors
+- **Location**: Books_API > API Tests > Test 10 > 10. POST Authors & 10. DELETE Authors
+
+## Automatic
+"Design an automated performance test that simulates a large number of users making requests simultaneously to check the API’s performance under heavy load."
+
+## Motivation
+This test will automatically test how well the server handles 100 users doing requests to the server during 1 minutes time.
+
+## Test Steps
+1. **Run Collection Performance Test**
+2. **Use the performance tab**
+3. **Change the rate limit in server.js to 10000**
+4. **Set virtual users to 100 and time to 1 minute**
+
+## Expected Results
+- The server should be able to handle the stress of heavy use with no errors
+
+## Actual Test Results
+- **Amount of requests**: Amount: `8722`
+-**Avg. respons time**: `532ms`
+
+### Test Details in Postman
+- **Name of Tests**: GET 10 Author & GET 10 Books
+- **Location**: Books_API > API Tests > Test 10 > Performance Test >
+
+## REMINDER
+**Remember to change Rate limit back to 300 after test is done**
 
 ---
 
-# Manual Testing 10: Books
+# Manual & Automatic Testing 10: Books
 
 ## Test Case
-"Test the API’s performance under heavy load, simulating a large number of users making requests simultaneously"
+
+## Manual
+"Test the API’s performance under heavy load, simulating a large number of users making requests simultaneously."
+
+## Motivation
+This test will test how well the API responds to heavy trafic. 
 
 ## Test Steps
 1. **Simulate Database Failure**:
@@ -817,12 +913,47 @@ Here I have done the manual and automatic test together, if you do the manual yo
 - **Name of Tests**: POST 10.1 - 10.10 Books & DELETE 10.1 - 10.10 Books
 - **Location**: Books_API > Manual testing > Test 10 > 10. POST Books & 10. DELETE Books
 
+## Automatic
+"Design an automated performance test that simulates a large number of users making requests simultaneously to check the API’s performance under heavy load."
+
+## Motivation
+This test will automatically test how well the server handles 100 users doing requests to the server during 1 minutes time.
+
+## Test Steps
+1. **Run Collection Performance Test**
+2. **Use the performance tab**
+3. **Change the rate limit in server.js to 10000**
+4. **Set virtual users to 100 and time to 1 minute**
+
+## Expected Results
+- The server should be able to handle the stress of heavy use with no errors
+
+## Actual Test Results
+- **Amount of requests**: Amount: `8722`
+-**Avg. respons time**: `532ms`
+
+### Test Details in Postman
+- **Name of Tests**: GET 10 Author & GET 10 Books
+- **Location**: Books_API > API Tests > Test 10 > Performance Test >
+
+## REMINDER
+**Remember to change Rate limit back to 300 after test is done**
+
 ---
 
-# Manual Testing 11: Authors
+# Manual & Automatic Testing 11: Authors
 
 ## Test Case
+
+## Manual
 "Verify that the API can recover gracefully from failures, such as database connection issues without compromising data integrity."
+
+## Automatic
+"Create an automated test that verifies the API can recover gracefully from failures, such as database connection issues or third-party service outages, without compromising data integrity."
+
+## Motivation
+Here the tests will check if the server can handle if it goes down and then comes back online again and sends a message to the user.
+The manual and automatic tests are the same here since they the test code to work properly and they need to be run as a collection.
 
 ## Test Steps
 1. **Simulate Database Failure**:
@@ -861,14 +992,23 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ### Test Details in Postman
 - **Name of Tests**: GET 11.1 - 11.3 Authors
-- **Location**: Books_API > Manual testing > Test 11 > 11.1 - 11.3 GET Authors
+- **Location**: Books_API > API Tests > Test 11 > 11.1 - 11.3 GET Authors
 
 ---
 
-# Manual Testing 11: Books
+# Manual & Automatic Testing 11: Books
 
 ## Test Case
+
+## Manual
 "Verify that the API can recover gracefully from failures, such as database connection issues without compromising data integrity."
+
+## Automatic
+"Create an automated test that verifies the API can recover gracefully from failures, such as database connection issues or third-party service outages, without compromising data integrity."
+
+## Motivation
+Here the tests will check if the server can handle if it goes down and then comes back online again and sends a message to the user.
+The manual and automatic tests are the same here since they the test code to work properly and they need to be run as a collection.
 
 ## Test Steps
 1. **Simulate Database Failure**:
@@ -907,14 +1047,23 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ### Test Details in Postman
 - **Name of Tests**: GET 11.1 - 11.3 Books
-- **Location**: Books_API > Manual testing > Test 11 > 11.1 - 11.3 GET Books
+- **Location**: Books_API > API Tests > Test 11 > 11.1 - 11.3 GET Books
 
 ---
 
-# Manual Testing 12: Authors
+# Manual & Automatic Testing 12: Authors
 
 ## Test Case
+
+## Manual
 "Test the API’s ability to handle edge cases, such as requests with missing or invalid parameters, and ensure that appropriate error messages are returned."
+
+## Automatic
+"Develop an automated test to handle edge cases, such as requests with missing or invalid parameters, and ensure that appropriate error messages are returned."
+
+## Motivation
+In this test we will try to get the API to get a error because of a incorrect insertion of parameters. It should be able to handle it with a error message.
+The manual and automatic tests are the same here as well
 
 ## Test Steps
 1. **Simulate Database Failure**:
@@ -936,14 +1085,23 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ### Test Details in Postman
 - **Name of Tests**: GET 12. Authors
-- **Location**: Books_API > Manual testing > Test 12 > 12 GET Authors
+- **Location**: Books_API > API Tests > Test 12 > 12 GET Authors
 
 ---
 
 # Manual Testing 12: Books
 
 ## Test Case
+
+## Manual
 "Test the API’s ability to handle edge cases, such as requests with missing or invalid parameters, and ensure that appropriate error messages are returned."
+
+## Automatic
+"Develop an automated test to handle edge cases, such as requests with missing or invalid parameters, and ensure that appropriate error messages are returned."
+
+## Motivation
+In this test we will try to get the API to get a error because of a incorrect insertion of parameters. It should be able to handle it with a error message.
+The manual and automatic tests are the same here as well
 
 ## Test Steps
 1. **Simulate Database Failure**:
@@ -965,11 +1123,11 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ### Test Details in Postman
 - **Name of Tests**: GET 12. Books
-- **Location**: Books_API > Manual testing > Test 12 > 12 GET Books
+- **Location**: Books_API > API Tests > Test 12 > 12 GET Books
 
 ---
 
-# Manual & Automatic Testing 12: Rate Limit
+# Manual & Automatic Testing 13: Rate Limit
 
 ## Test Cases
 
@@ -978,6 +1136,9 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ## Automatic
 "Write an automated test to verify that the API correctly implements any rate limiting or throttling mechanisms to prevent abuse or excessive use of resources."
+
+## Motivation
+This test will try to reach the rate limit that is set on the server to simulate a attack or something similar.
 
 ## Test Steps
 1. **Rate Limit Test**:
@@ -998,6 +1159,6 @@ Here I have done the manual and automatic test together, if you do the manual yo
 
 ### Test Details in Postman
 - **Name of Tests**: GET 13. Rate-Limit
-- **Location**: Books_API > Manual testing > Test 13 > 13 GET Rate-Limit
+- **Location**: Books_API > API Tests > Test 13 > 13 GET Rate-Limit
 
 ---

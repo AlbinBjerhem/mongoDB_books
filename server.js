@@ -8,7 +8,7 @@ const port = 3000
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 300,
+  limit: 300000,
   standardHeaders: 'draft-7',
   legacyHeaders: false,
 })
