@@ -24,6 +24,7 @@ To begin using the Book and Author Search API, follow these steps:
 2. **Set up the environment**:
     - Update the MongoDB connection strings in `server.js` and `importData.js` to your own.
 3. **Install dependencies**: Run `npm install` in the project root directory.
+4. **Start MongoDB**: Make sure that MongoDB is running before proceeding to the next steps.
 4. **Populate the database**: Execute `node importData.js` to import the initial data into your database.
 5. **Start the server**:
     - Use `node server.js` to start the server, or `nodemon server.js` if you have nodemon installed for live updates.
